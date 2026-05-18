@@ -1,5 +1,6 @@
 import 'package:better_test_reporter/json_processor.dart';
 import 'package:better_test_reporter/src/junit_xml/test_json_to_junit.dart';
+import 'package:better_test_reporter/src/parser/json_reporter_protocol_0_1/test_result.dart';
 import 'package:intl/intl.dart';
 import 'package:test/test.dart';
 
@@ -159,6 +160,17 @@ void main() {
                 ],
                 prints: [],
               ),
+              Test(
+                suiteId: 1,
+                name: 'error some file test',
+                startTime: 76,
+                url:
+                    'file:///Users/bilbo/src/repo/package/test/some_file_test.dart',
+                endTime: 95,
+                result: TestResult.error,
+                problems: [],
+                prints: [],
+              ),
             ],
           ),
         ],
@@ -173,7 +185,7 @@ void main() {
 
       expect(xmlReport, '''<?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite errors="0" failures="1" tests="2" skipped="0" name=".Users.bilbo.src.repo.package.test.some_file" timestamp="$formattedTimestamp">
+  <testsuite errors="1" failures="1" tests="3" skipped="0" name=".Users.bilbo.src.repo.package.test.some_file" timestamp="$formattedTimestamp">
     <properties>
       <property name="platform" value="vm"/>
     </properties>
@@ -182,6 +194,9 @@ void main() {
     </testcase>
     <testcase classname=".Users.bilbo.src.repo.package.test.some_file" file="/Users/bilbo/src/repo/package/test/some_file_test.dart" name="failing some file test" time="0.017">
       <failure message="1 failure, see stacktrace for details">Failure: Expected false but was true</failure>
+    </testcase>
+    <testcase classname=".Users.bilbo.src.repo.package.test.some_file" file="/Users/bilbo/src/repo/package/test/some_file_test.dart" name="error some file test" time="0.019">
+      <error/>
     </testcase>
   </testsuite>
 </testsuites>''');
@@ -197,7 +212,7 @@ void main() {
 
       expect(xmlReport, '''<?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite errors="0" failures="1" tests="2" skipped="0" name="package.test.some_file" timestamp="$formattedTimestamp">
+  <testsuite errors="1" failures="1" tests="3" skipped="0" name="package.test.some_file" timestamp="$formattedTimestamp">
     <properties>
       <property name="platform" value="vm"/>
     </properties>
@@ -206,6 +221,9 @@ void main() {
     </testcase>
     <testcase classname="package.test.some_file" file="package/test/some_file_test.dart" name="failing some file test" time="0.017">
       <failure message="1 failure, see stacktrace for details">Failure: Expected false but was true</failure>
+    </testcase>
+    <testcase classname="package.test.some_file" file="package/test/some_file_test.dart" name="error some file test" time="0.019">
+      <error/>
     </testcase>
   </testsuite>
 </testsuites>''');
@@ -221,7 +239,7 @@ void main() {
 
       expect(xmlReport, '''<?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite errors="0" failures="1" tests="2" skipped="0" name="test.some_file" timestamp="$formattedTimestamp">
+  <testsuite errors="1" failures="1" tests="3" skipped="0" name="test.some_file" timestamp="$formattedTimestamp">
     <properties>
       <property name="platform" value="vm"/>
     </properties>
@@ -230,6 +248,9 @@ void main() {
     </testcase>
     <testcase classname="test.some_file" file="test/some_file_test.dart" name="failing some file test" time="0.017">
       <failure message="1 failure, see stacktrace for details">Failure: Expected false but was true</failure>
+    </testcase>
+    <testcase classname="test.some_file" file="test/some_file_test.dart" name="error some file test" time="0.019">
+      <error/>
     </testcase>
   </testsuite>
 </testsuites>''');

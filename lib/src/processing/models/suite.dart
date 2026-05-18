@@ -1,4 +1,5 @@
 import 'package:better_test_reporter/src/processing/models/models.dart';
+import 'package:better_test_reporter/src/parser/json_reporter_protocol_0_1/test_result.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'suite.freezed.dart';
@@ -34,7 +35,11 @@ class Suite with _$Suite {
   /// All non-hidden Tests with problems
   List<Test> get problems =>
       allTests
-          .where((test) => !test.hidden && test.problems.isNotEmpty)
+          .where(
+            (test) =>
+                !test.hidden &&
+                (test.problems.isNotEmpty || test.result == TestResult.error),
+          )
           .toList();
 
   /// All hidden Tests

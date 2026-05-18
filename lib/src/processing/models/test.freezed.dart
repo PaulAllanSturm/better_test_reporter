@@ -38,6 +38,7 @@ mixin _$Test {
   ///
   /// This will be -1 if this test was not completed.
   int get endTime => throw _privateConstructorUsedError;
+  TestResult get result => throw _privateConstructorUsedError;
 
   /// Whether this test's result should be hidden.
   bool get hidden => throw _privateConstructorUsedError;
@@ -69,6 +70,7 @@ abstract class $TestCopyWith<$Res> {
     String? url,
     String? rootUrl,
     int endTime,
+    TestResult result,
     bool hidden,
     bool skipped,
     List<Problem> problems,
@@ -97,6 +99,7 @@ class _$TestCopyWithImpl<$Res, $Val extends Test>
     Object? url = freezed,
     Object? rootUrl = freezed,
     Object? endTime = null,
+    Object? result = null,
     Object? hidden = null,
     Object? skipped = null,
     Object? problems = null,
@@ -134,6 +137,11 @@ class _$TestCopyWithImpl<$Res, $Val extends Test>
                     ? _value.endTime
                     : endTime // ignore: cast_nullable_to_non_nullable
                         as int,
+            result:
+                null == result
+                    ? _value.result
+                    : result // ignore: cast_nullable_to_non_nullable
+                        as TestResult,
             hidden:
                 null == hidden
                     ? _value.hidden
@@ -175,6 +183,7 @@ abstract class _$$TestImplCopyWith<$Res> implements $TestCopyWith<$Res> {
     String? url,
     String? rootUrl,
     int endTime,
+    TestResult result,
     bool hidden,
     bool skipped,
     List<Problem> problems,
@@ -200,6 +209,7 @@ class __$$TestImplCopyWithImpl<$Res>
     Object? url = freezed,
     Object? rootUrl = freezed,
     Object? endTime = null,
+    Object? result = null,
     Object? hidden = null,
     Object? skipped = null,
     Object? problems = null,
@@ -237,6 +247,11 @@ class __$$TestImplCopyWithImpl<$Res>
                 ? _value.endTime
                 : endTime // ignore: cast_nullable_to_non_nullable
                     as int,
+        result:
+            null == result
+                ? _value.result
+                : result // ignore: cast_nullable_to_non_nullable
+                    as TestResult,
         hidden:
             null == hidden
                 ? _value.hidden
@@ -272,6 +287,7 @@ class _$TestImpl extends _Test {
     this.url,
     this.rootUrl,
     this.endTime = -1,
+    this.result = TestResult.success,
     this.hidden = false,
     this.skipped = false,
     required final List<Problem> problems,
@@ -308,6 +324,9 @@ class _$TestImpl extends _Test {
   @override
   @JsonKey()
   final int endTime;
+  @override
+  @JsonKey()
+  final TestResult result;
 
   /// Whether this test's result should be hidden.
   @override
@@ -343,7 +362,7 @@ class _$TestImpl extends _Test {
 
   @override
   String toString() {
-    return 'Test(suiteId: $suiteId, name: $name, startTime: $startTime, url: $url, rootUrl: $rootUrl, endTime: $endTime, hidden: $hidden, skipped: $skipped, problems: $problems, prints: $prints)';
+    return 'Test(suiteId: $suiteId, name: $name, startTime: $startTime, url: $url, rootUrl: $rootUrl, endTime: $endTime, result: $result, hidden: $hidden, skipped: $skipped, problems: $problems, prints: $prints)';
   }
 
   @override
@@ -358,6 +377,7 @@ class _$TestImpl extends _Test {
             (identical(other.url, url) || other.url == url) &&
             (identical(other.rootUrl, rootUrl) || other.rootUrl == rootUrl) &&
             (identical(other.endTime, endTime) || other.endTime == endTime) &&
+            (identical(other.result, result) || other.result == result) &&
             (identical(other.hidden, hidden) || other.hidden == hidden) &&
             (identical(other.skipped, skipped) || other.skipped == skipped) &&
             const DeepCollectionEquality().equals(other._problems, _problems) &&
@@ -373,6 +393,7 @@ class _$TestImpl extends _Test {
     url,
     rootUrl,
     endTime,
+    result,
     hidden,
     skipped,
     const DeepCollectionEquality().hash(_problems),
@@ -396,6 +417,7 @@ abstract class _Test extends Test {
     final String? url,
     final String? rootUrl,
     final int endTime,
+    final TestResult result,
     final bool hidden,
     final bool skipped,
     required final List<Problem> problems,
@@ -430,6 +452,8 @@ abstract class _Test extends Test {
   /// This will be -1 if this test was not completed.
   @override
   int get endTime;
+  @override
+  TestResult get result;
 
   /// Whether this test's result should be hidden.
   @override

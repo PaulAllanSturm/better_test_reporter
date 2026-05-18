@@ -1,5 +1,6 @@
 import 'package:better_test_reporter/json_processor.dart';
 import 'package:better_test_reporter/src/processing/processors/processors.dart';
+import 'package:better_test_reporter/src/parser/json_reporter_protocol_0_1/test_result.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -98,6 +99,7 @@ void main() {
                 startTime: 30,
                 url: 'file://package/test/package_test.dart',
                 endTime: 50,
+                result: TestResult.success,
                 problems: [],
                 prints: ['This is the test that passes'],
               ),
@@ -107,6 +109,7 @@ void main() {
                 startTime: 58,
                 url: 'file://package/test/package_test.dart',
                 endTime: 75,
+                result: TestResult.failure,
                 problems: [
                   Problem(
                     message: 'Expected false but was true',

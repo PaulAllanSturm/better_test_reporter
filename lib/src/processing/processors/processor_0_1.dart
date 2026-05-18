@@ -37,6 +37,7 @@ class Processor0_1 implements Processor {
         testDone: (time, result, testId, hidden, skipped) {
           tests[testId] = tests[testId]!.copyWith(
             hidden: hidden,
+            result: result,
             skipped: skipped,
             endTime: time,
           );

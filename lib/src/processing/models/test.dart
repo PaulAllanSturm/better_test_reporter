@@ -1,4 +1,5 @@
 import 'package:better_test_reporter/src/processing/models/models.dart';
+import 'package:better_test_reporter/src/parser/json_reporter_protocol_0_1/test_result.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'test.freezed.dart';
@@ -31,6 +32,8 @@ class Test with _$Test {
     ///
     /// This will be -1 if this test was not completed.
     @Default(-1) int endTime,
+
+    @Default(TestResult.success) TestResult result,
 
     /// Whether this test's result should be hidden.
     @Default(false) bool hidden,

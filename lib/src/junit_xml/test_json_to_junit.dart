@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:better_test_reporter/src/processing/models/models.dart';
+import 'package:better_test_reporter/src/parser/json_reporter_protocol_0_1/test_result.dart';
 import 'package:intl/intl.dart';
 import 'package:xml/xml.dart';
 
@@ -53,9 +54,9 @@ class TestJsonToJunit {
     final className = _convertPathToClassName(suite.path);
     final attributes = <String, String>{
       'errors':
-          '${suite.problems.where((t) => !t.problems.every((p) => p.isFailure)).length}',
+          '${suite.problems.where((t) => !t.problems.every((p) => p.isFailure) || t.result == TestResult.error).length}',
       'failures':
-          '${suite.problems.where((t) => t.problems.every((p) => p.isFailure)).length}',
+          '${suite.problems.where((t) => t.problems.every((p) => p.isFailure) && t.result != TestResult.error).length}',
       'tests': '${suite.tests.length}',
       'skipped': '${suite.skipped.length}',
       'name': className,
@@ -117,6 +118,7 @@ class TestJsonToJunit {
       },
       nest: () {
         if (test.skipped) builder.element('skipped');
+        if (test.result == TestResult.error) builder.element('error');
         _buildProblems(builder: builder, problems: test.problems);
         _buildPrints(builder: builder, prints: test.prints);
       },
